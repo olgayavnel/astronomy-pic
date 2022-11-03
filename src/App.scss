@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,600;1,300&display=swap"');
+
+/************ Breakpoints variables ************/
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+/************ Breakpoints mixins ************/
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+/************ Default Css ************/
+
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
+body {
+  margin: 0;
+}
+
+h2,
+p {
+  margin: 0;
+  color: rgb(13, 14, 17);
+}
+
+/************ App Css ************/
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 238, 174, 1) 0%,
+    rgba(0, 50, 108, 1) 100%
+  );
+}
+
+/************ PictureFetch Css ************/
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: auto;
+
+  margin: 2rem 1rem;
+  padding-bottom: 1rem;
+
+  @include md {
+    width: 80vw;
+    max-width: 800px;
+    background: radial-gradient(
+      circle,
+      rgba(212, 238, 174, 1) 55%,
+      rgba(0, 50, 108, 1) 100%
+    );
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
+      0px 10px 14px 1px rgba(0, 0, 0, 0.14),
+      0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+    border-radius: 0.5rem;
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+
+    border-radius: 0.5rem 0.5rem 0 0;
+    width: 100%;
+    padding: 1rem 0;
+
+    @include md {
+      background-color: #fde8c9;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+
+      @include md {
+        padding-right: 1rem;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  p:nth-child(3) {
+    font-style: italic;
+  }
+}
+
+.explanation {
+  padding: 0 1rem;
+
+  p {
+    line-height: 2rem;
+    letter-spacing: 0.05rem;
+  }
+}
+
+.image-wrapper {
+  img {
+    border-radius: 50px;
+    max-width: 20rem;
+    height: auto;
+
+    // 576px window width and more
+    @include sm {
+      max-width: 30rem;
+    }
+
+    // 768px window width and more
+    @include md {
+      max-width: 35rem;
+    }
+
+    @include lg {
+      max-width: 40rem;
+    }
+  }
+}
