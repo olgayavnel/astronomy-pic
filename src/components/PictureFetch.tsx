@@ -13,7 +13,7 @@ interface AstronomyPicInterface {
 const PictureFetch = () => {
   const [astronomyPicData, setAstronomyPicData] =
     useState<AstronomyPicInterface>();
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [fetchError, setFetchError] = useState(null);
 
   const fetchData = async () => {
@@ -27,29 +27,46 @@ const PictureFetch = () => {
     } catch (err: any) {
       console.log('error: ', err.message);
       setFetchError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    setTimeout(() => {
+      (async () => await fetchData())();
+    }, 2000);
   }, []);
 
+  const handleClick = async () => {
+    console.log('we are here');
+    await fetchData();
+  };
+
   return (
-    <div className='content'>
-      {fetchError && (
-        <p style={{ color: 'blue' }}>{`Error occured: ${fetchError} `}</p>
+    <>
+      {fetchError && <h2>{`Error occured: ${fetchError} `}</h2>}
+      {isLoading && <h2>Loading...</h2>}
+      {!fetchError && !isLoading && (
+        <>
+          <div className='content'>
+            <div className='header'>
+              <h2>{astronomyPicData?.title}</h2>
+            </div>
+            <div className='image-wrapper'>
+              <img src={astronomyPicData?.url} alt={astronomyPicData?.title} />
+            </div>
+            <p>{astronomyPicData?.date}</p>
+            <div className='explanation'>
+              <p>{astronomyPicData?.explanation}</p>
+            </div>
+          </div>
+          <button type='button' className='button' onClick={handleClick}>
+            Show New Image
+          </button>
+        </>
       )}
-      <div className='header'>
-        <h2>{astronomyPicData?.title}</h2>
-      </div>
-      <div className='image-wrapper'>
-        <img src={astronomyPicData?.url} alt={astronomyPicData?.title} />
-      </div>
-      <p>{astronomyPicData?.date}</p>
-      <div className='explanation'>
-        <p>{astronomyPicData?.explanation}</p>
-      </div>
-    </div>
+    </>
   );
 };
 
