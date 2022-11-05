@@ -94,7 +94,7 @@ p {
 
   @include md {
     width: 80vw;
-    max-width: 800px;
+    max-width: 1000px;
     background: radial-gradient(
       circle,
       rgba(212, 238, 174, 1) 55%,
@@ -139,6 +139,12 @@ p {
   p {
     line-height: 2rem;
     letter-spacing: 0.05rem;
+    font-size: 0.9rem;
+
+    // 768px window width and more
+    @include md {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -150,19 +156,21 @@ p {
 
     // 576px window width and more
     @include sm {
-      max-width: 30rem;
+      max-width: 25rem;
     }
 
     // 768px window width and more
     @include md {
-      max-width: 35rem;
+      max-width: 30rem;
     }
 
     @include lg {
-      max-width: 40rem;
+      max-width: 35rem;
     }
   }
 }
+
+/************ Button. Credits to https://codepen.io/kocsten/pen/rggjXp  ************/
 
 .button {
   width: 220px;
@@ -178,7 +186,6 @@ p {
   margin-bottom: 2rem;
 }
 
-/************ Credits to https://codepen.io/kocsten/pen/rggjXp  ************/
 .button:before {
   content: '';
   background: linear-gradient(
